@@ -1,4 +1,3 @@
-import ctypes as cty
 from tkinter import *
 from tkinter import messagebox as msg
 import random as rnd
