@@ -1,22 +1,31 @@
 from tkinter import *
-from tkinter import messagebox as msg
-import random as rnd
+import tkinter as tk
 
-user32 = cty.windll.user32
-screensize = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+import threading
+import time
+import random
+import sys
 
-pos_X = rnd.randint(0, screensize[0])
-pos_Y = rnd.randint(0, screensize[1])
+def disable_event():
+    pass
 
+def move_window():
+    root = Tk()
+    root.title("Haz sido infectado por el virus de TEAMHAWKS")
+    root.attributes('-toolwindow',True)
+    root.attributes('-disabled',True)
 
-def click():
+    x = random.randint(0, root.winfo_screenwidth())
+    y = random.randint(0,root.winfo_screenheight())
+    root.resizable(0,0)
+    root.geometry(f'300x50+{x}+{y}')
+    root.configure(background='white')
 
-    msg.showwarning(title='WARNING!!!!!!!',
-                        message='Estás infectado por un virus divertido hahahah')
+    root.protocol("WM_DELETE_WINDOW", disable_event)
+    
+    root.mainloop()
 
-
-window = Tk()
-button = Button(window, command=click, text='Click me')
-button.pack()
-
-window.mainloop()
+if __name__ == '__main__':
+    for i in range(3):
+        thread = threading.Thread(target=move_window)
+        thread.start()
