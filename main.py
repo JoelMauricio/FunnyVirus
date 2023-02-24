@@ -6,9 +6,14 @@ import threading
 # wpc = bgc.WallpaperChanger()
 # wpc.change_Wallpaper(C.WALLPAPER_PATH2)
 
-pp.move_window
 
-for i in range(5):
-    thread = threading.Thread(target=pp.move_window)
-    print('a')
-    thread.start()
+
+# for i in range(5):
+#     thread = threading.Thread(target=pp.move_window)
+#     print('a')
+#     thread.start()
+
+popup = pp.popupGenerator()
+print('hola')
+popup.start_popups(Count=5)
+popup.closeWindows()
