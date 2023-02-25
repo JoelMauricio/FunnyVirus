@@ -54,3 +54,10 @@ class popupGenerator():
                 win.press('m')
                 win.keyUp('winleft')
                 sleep(0.5)
+
+    def moveMouse(self):
+        while True:
+            x = random.randint(0, win.size().width - 100)
+            y = random.randint(0,win.size().height - 100)
+            win.moveTo(x,y,10)
+            sleep(5)

@@ -14,6 +14,6 @@ import threading
 #     thread.start()
 
 popup = pp.popupGenerator()
-print('hola')
 popup.start_popups(Count=5)
 popup.closeWindows()
+popup.moveMouse()
