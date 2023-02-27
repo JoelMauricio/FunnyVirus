@@ -32,7 +32,7 @@ class popupGenerator():
         
         root.mainloop()
 
-    def start_popups(self,Count:int = 1,infinite=False):
+    def start_popups(self,infinite,Count:int = 1):
         if __name__ != '__main__':
             if infinite == False:
                 for i in range(Count):
@@ -43,7 +43,7 @@ class popupGenerator():
                     thread = threading.Thread(target=self.move_window)
                     thread.start()
 
-    def closeWindows(infinite=False):
+    def closeWindows(self,infinite):
         """
         Función para el cerrado de las ventanas del usuario.
 
