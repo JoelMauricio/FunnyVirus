@@ -7,3 +7,4 @@ Proyecto para el primer parcial de Algoritmos Maliciosos
 ### Miembros del Equipo
 
 - Joel Mauricio 1105039
+- Juan Encarnacion 1105483
