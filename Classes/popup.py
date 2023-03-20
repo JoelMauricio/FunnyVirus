@@ -18,17 +18,18 @@ class popupGenerator():
 
     def move_window(self):
         root = Tk()
-        root.title(C.POPUP_MESSAGE)
-        root.attributes('-toolwindow',True)
-        root.attributes('-disabled',True)
+        root.overrideredirect(True)
 
         x = random.randint(0, root.winfo_screenwidth())
         y = random.randint(0,root.winfo_screenheight())
         root.resizable(0,0)
         root.geometry(f'300x50+{x}+{y}')
-        root.configure(background='white')
 
-        root.protocol("WM_DELETE_WINDOW", self.disable_event)
+        message = Label(root,text=C.POPUP_MESSAGE,
+                    font='ARIALBLACK 12',fg='Red')
+        message.pack(expand=True)
+
+        root.call('wm', 'attributes', '.', '-topmost', '1')
         
         root.mainloop()
 
