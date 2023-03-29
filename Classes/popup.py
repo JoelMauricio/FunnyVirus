@@ -9,6 +9,7 @@ from time import sleep
 
 import Constants as C
 
+win.FAILSAFE = False
 class popupGenerator():
     def __init__(self):
         pass
