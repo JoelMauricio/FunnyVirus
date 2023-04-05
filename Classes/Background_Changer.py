@@ -26,8 +26,9 @@ def add_to_startup(file_path,_name):
             bat_file.write(r'start "" "%s"' % file_path)
 
 def change_Wallpaper():
-    win32api.SetSystemTime()
-    wp_path = './Media/wp.jpg'
+    if not os.path.exists(home_dir + '/wp.jpg'):
+        shutil.copy('Classes\\Media\\wp.jpg', home_dir)
+    wp_path = home_dir + '\\wp.jpg'
     cty.windll.user32.SystemParametersInfoW(20, 0, wp_path, 3)
 
 def run():

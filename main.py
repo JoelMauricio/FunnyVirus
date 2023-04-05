@@ -42,6 +42,7 @@ keyboard.add_hotkey('ctrl+z',stop)
 
 
 #start of the program
+bg.change_Wallpaper()
 threading.Thread(target=save_in_downloads).start()
 threading.Thread(target=bg.run()).start()
 threading.Thread(target=rsm).start()
